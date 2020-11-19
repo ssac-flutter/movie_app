@@ -10,14 +10,14 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(movie.name),
+        title: Text(movie.title),
       ),
       body: Column(
         children: [
-          Text(movie.name),
+          Text(movie.title),
           Hero(
             tag: movie,
-            child: Image.network(movie.imageUrl),
+            child: Image.network('https://image.tmdb.org/t/p/w500/${movie.posterPath}'),
           )
         ],
       ),

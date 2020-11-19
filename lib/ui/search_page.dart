@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/model/movie.dart';
+import 'package:flutter_movie/repository/MovieRepository.dart';
 import 'package:flutter_movie/ui/detail_page.dart';
 import 'package:flutter_movie/ui/movie_item.dart';
 
@@ -9,17 +10,18 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final movieItems = [
-    Movie('https://cphoto.asiae.co.kr/listimglink/6/2017071813023751011_1.jpg',
-        '수지'),
-    Movie(
-        'https://img.huffingtonpost.com/asset/5caad7602400005d010443d8.jpeg?ops=scalefit_630_noupscale',
-        '수지'),
-    Movie('https://cphoto.asiae.co.kr/listimglink/6/2017071813023751011_1.jpg',
-        '수지'),
-    Movie('https://cphoto.asiae.co.kr/listimglink/6/2017071813023751011_1.jpg',
-        '수지'),
-  ];
+  List<Movie> movieItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    MovieRepository().fetchMovies().then((movies) {
+      setState(() {
+        movieItems = movies;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

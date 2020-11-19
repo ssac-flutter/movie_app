@@ -16,14 +16,14 @@ class MovieItem extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
-              movie.imageUrl,
+              'https://image.tmdb.org/t/p/w500/${movie.posterPath}',
               fit: BoxFit.cover,
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
-          child: Text(movie.name),
+          child: Text(movie.title),
         ),
       ],
     );
