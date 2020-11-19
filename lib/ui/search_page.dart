@@ -12,6 +12,8 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   List<Movie> movieItems = [];
 
+  var _query = '';
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +37,11 @@ class _SearchPageState extends State<SearchPage> {
           children: [
             TextField(
               decoration: InputDecoration(hintText: '검색'),
+              onChanged: (text) {
+                setState(() {
+                  _query = text;
+                });
+              },
             ),
             SizedBox(
               height: 40,
@@ -44,7 +51,8 @@ class _SearchPageState extends State<SearchPage> {
                 childAspectRatio: 1 / 1.9,
                 crossAxisSpacing: 4,
                 crossAxisCount: 3,
-                children: movieItems.map((movie) {
+                children: movieItems.where((movie) => movie.title.toLowerCase().contains(_query.toLowerCase()))
+                    .map((movie) {
                   return InkWell(
                       child: MovieItem(movie),
                       onTap: () {
